@@ -17,6 +17,18 @@ agrant@docker1:/vagrant$ nomad run example.nomad
 #### View nodes & service in consul 
 http://192.168.0.20:8500
 
+Get docker instance meta-data from consul 
+
+$ curl http://192.168.0.20:8500/v1/catalog/service/cache-redis
+
+#### Check job status from nomad client
+
+vagrant@docker1:~$ nomad node-status
+
+vagrant@docker1:~$ nomad status example
+
+
+
 #### Nomad & Consul server setup 
 3 VMs : Docker1 Docker2 Docker3
 
