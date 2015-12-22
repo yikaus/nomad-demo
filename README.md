@@ -24,6 +24,6 @@ Docker1 :  Nomad & Consul server as well as client
 
 Docker2 :  Nomad & Consul client 
 
-Docker1 :  Nomad & Consul client
+Docker3 :  Nomad & Consul client
 
 ###### beer!
