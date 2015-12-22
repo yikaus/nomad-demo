@@ -1,0 +1,21 @@
+region = "au"
+
+datacenter = "dc1"
+
+bind_addr = "192.168.0.21"
+
+# Increase log verbosity
+log_level = "DEBUG"
+
+# Setup data dir
+data_dir = "/tmp/nomad"
+
+client {
+	enabled = true
+	servers = ["192.168.0.20:4647"]
+        network_interface = "eth1"
+        options = {
+          consul.address = "192.168.0.21:8500"
+         }
+
+}
