@@ -1,8 +1,9 @@
 {
   "data_dir": "/tmp/consul",
   "log_level": "INFO",
-  "server": false,
-  "retry_join": ["192.168.0.20"],
-  "bind_addr": "192.168.0.21",  
-  "client_addr": "192.168.0.21"
+  "server": true,
+  "bind_addr": "192.168.0.21",
+  "client_addr": "192.168.0.21",
+  "ui_dir": "/lib/consul/ui",
+  "retry_join": ["192.168.0.20"]
 }

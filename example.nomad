@@ -2,20 +2,17 @@ job "example" {
 	region = "au"
 	datacenters = ["dc1"]
 	type = "service"
-	constraint {
-		attribute = "$attr.kernel.name"
-		value = "linux"
-	}
 	update {
 		stagger = "10s"
 		max_parallel = 1
 	}
 	group "cache" {
-		count = 3
+		count = 2
 		restart {
 			interval = "5m"
 			attempts = 10
 			delay = "25s"
+			mode = "delay"
 		}
 		task "redis" {
 			driver = "docker"
@@ -38,7 +35,7 @@ job "example" {
 			}
 			resources {
 				cpu = 500 # 500 Mhz
-				memory = 256 # 256MB
+				memory = 128 # 128MB
 				network {
 					mbits = 10
 					port "db" {

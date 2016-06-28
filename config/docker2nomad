@@ -10,12 +10,19 @@ log_level = "DEBUG"
 # Setup data dir
 data_dir = "/tmp/nomad"
 
+# Enable the server
+server {
+    enabled = true
+    bootstrap_expect = 2
+		retry_join = ["192.168.0.20"]
+}
+
 client {
 	enabled = true
-	servers = ["192.168.0.20:4647"]
-        network_interface = "eth1"
-        options = {
-          consul.address = "192.168.0.21:8500"
-         }
+	servers = ["192.168.0.21:4647"]
+  network_interface = "eth1"
+  options = {
+    consul.address = "192.168.0.21:8500"
+   }
 
 }

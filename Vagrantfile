@@ -2,15 +2,19 @@
 # vi: set ft=ruby :
 
 $script1 = <<SCRIPT
+export DEBIAN_FRONTEND=noninteractive
 sudo apt-get update
 sudo apt-get -qq install apt-transport-https
 echo Fetching Nomad consul...
 cd /tmp/
-sudo curl -sSL https://releases.hashicorp.com/nomad/0.2.3/nomad_0.2.3_linux_amd64.zip -o nomad.zip
-sudo curl -sSL https://releases.hashicorp.com/consul/0.6.0/consul_0.6.0_linux_amd64.zip -o consul.zip
+sudo curl -sSL https://releases.hashicorp.com/nomad/0.3.2/nomad_0.3.2_linux_amd64.zip -o nomad.zip
+sudo curl -sSL https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_linux_amd64.zip -o consul.zip
+sudo curl -sSL https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_web_ui.zip -o consul_ui.zip
 echo Installing ...
 sudo unzip nomad.zip -d /usr/bin
 sudo unzip consul.zip -d /usr/bin
+sudo mkdir -p /lib/consul/ui
+sudo unzip consul_ui.zip -d /lib/consul/ui
 sudo mv /tmp/*.service  /lib/systemd/system
 SCRIPT
 
@@ -19,19 +23,9 @@ sudo mv /tmp/consulconfig /etc/consul
 sudo mv /tmp/nomadconfig /etc/nomad
 sudo systemctl enable consul.service nomad.service
 sudo systemctl start consul.service nomad.service
-SCRIPT
-
-$script3 = <<SCRIPT
-cd /tmp/
-sudo curl -sSL https://releases.hashicorp.com/consul/0.6.0/consul_0.6.0_web_ui.zip -o consul_ui.zip
-sudo mkdir -p /lib/consul/ui
-sudo unzip consul_ui.zip -d /lib/consul/ui
-sudo mv /tmp/consulconfig /etc/consul
-sudo mv /tmp/nomadconfig /etc/nomad
-sudo systemctl enable consul.service nomad.service
-sudo systemctl start consul.service nomad.service
 echo "export NOMAD_ADDR=http://192.168.0.20:4646" >> /home/vagrant/.profile
 SCRIPT
+
 
 
 VAGRANTFILE_API_VERSION = "2"
@@ -54,7 +48,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       nomadconfig.destination = "/tmp/nomadconfig"
     end
     docker1.vm.provision :shell do |shell|
-      shell.inline = $script3
+      shell.inline = $script2
       shell.privileged = false
     end  
   end
@@ -71,23 +65,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       nomadconfig.destination = "/tmp/nomadconfig"
     end
     docker2.vm.provision :shell do |shell|
-      shell.inline = $script2
-      shell.privileged = false
-    end  
-  end
-  
-  config.vm.define :docker3 do |docker3|
-    docker3.vm.hostname = "docker3"
-    docker3.vm.network "private_network", ip: "192.168.0.22"
-    docker3.vm.provision :file do |consulconfig|
-      consulconfig.source = "config/docker3consul"
-      consulconfig.destination = "/tmp/consulconfig"
-    end
-    docker3.vm.provision :file do |nomadconfig|
-      nomadconfig.source = "config/docker3nomad"
-      nomadconfig.destination = "/tmp/nomadconfig"
-    end
-    docker3.vm.provision :shell do |shell|
       shell.inline = $script2
       shell.privileged = false
     end  
