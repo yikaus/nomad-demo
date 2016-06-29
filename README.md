@@ -32,7 +32,9 @@ $ vagrant up
 $ vagrant ssh docker1
 
 vagrant@docker1:~$ cd /vagrant
+
 vagrant@docker1:/vagrant$ nomad run loadbalancer.nomad
+
 vagrant@docker1:/vagrant$ nomad run example.nomad
 
 
