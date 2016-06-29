@@ -1,4 +1,4 @@
-## Docker scheduler and service discovery with Nomad+Consul_Consult_template+haproxy
+## Docker scheduler and service discovery with Nomad+Consul+Consult_template+haproxy
 
 This demo to quickly show you how to use nomad and consul setup a docker scheduler across cluster host as well as docker service discovery
 
@@ -20,7 +20,9 @@ Docker2 :  Nomad server/client + Consul server/client
 
 #### Bootstrap
 $ cd single_server_three_client
+
 OR
+
 $ cd two_servers
  
 $ vagrant up
