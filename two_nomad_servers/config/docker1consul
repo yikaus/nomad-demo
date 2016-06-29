@@ -3,7 +3,8 @@
   "log_level": "INFO",
   "server": true,
   "bind_addr": "192.168.0.20",
-  "client_addr": "192.168.0.20",
+  "client_addr": "0.0.0.0",
   "ui_dir": "/lib/consul/ui",
-  "bootstrap_expect": 2
+  "bootstrap_expect": 2,
+  "retry_join": ["192.168.0.20"]
 }
