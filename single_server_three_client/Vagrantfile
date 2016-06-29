@@ -6,8 +6,8 @@ sudo apt-get update
 sudo apt-get -qq install apt-transport-https
 echo Fetching Nomad consul...
 cd /tmp/
-sudo curl -sSL https://releases.hashicorp.com/nomad/0.2.3/nomad_0.2.3_linux_amd64.zip -o nomad.zip
-sudo curl -sSL https://releases.hashicorp.com/consul/0.6.0/consul_0.6.0_linux_amd64.zip -o consul.zip
+sudo curl -sSL https://releases.hashicorp.com/nomad/0.3.2/nomad_0.3.2_linux_amd64.zip -o nomad.zip
+sudo curl -sSL https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_linux_amd64.zip -o consul.zip
 echo Installing ...
 sudo unzip nomad.zip -d /usr/bin
 sudo unzip consul.zip -d /usr/bin
@@ -23,7 +23,7 @@ SCRIPT
 
 $script3 = <<SCRIPT
 cd /tmp/
-sudo curl -sSL https://releases.hashicorp.com/consul/0.6.0/consul_0.6.0_web_ui.zip -o consul_ui.zip
+sudo curl -sSL https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_web_ui.zip -o consul_ui.zip
 sudo mkdir -p /lib/consul/ui
 sudo unzip consul_ui.zip -d /lib/consul/ui
 sudo mv /tmp/consulconfig /etc/consul
