@@ -35,7 +35,7 @@ vagrant@docker1:~$ cd /vagrant
 
 vagrant@docker1:/vagrant$ nomad run loadbalancer.nomad
 
-vagrant@docker1:/vagrant$ nomad run example.nomad
+vagrant@docker1:/vagrant$ nomad run web.nomad
 
 
 #### View nodes & service in consul 
@@ -43,7 +43,7 @@ http://192.168.0.20:8500
 
 Get docker instance meta-data from consul 
 
-$ curl http://192.168.0.20:8500/v1/catalog/service/cache-redis
+$ curl http://192.168.0.20:8500/v1/catalog/service/web-nodejs
 
 * In two servers configuration you can use both servers to action above operations
 
@@ -52,7 +52,7 @@ $ curl http://192.168.0.20:8500/v1/catalog/service/cache-redis
 vagrant@docker1:~$ nomad node-status
 
 vagrant@docker1:~$ nomad status loadbalancer
-vagrant@docker1:~$ nomad status example
+vagrant@docker1:~$ nomad status web
 
 
 
@@ -62,6 +62,16 @@ Go any of vm , like docker1 , docker 2
 vagrant@docker1:~$ docker exec `haproxy_container_id` cat /haproxy/haproxy.cfg
 
 vagrant@docker2:~$ docker exec `haproxy_container_id` cat /haproxy/haproxy.cfg
+
+#### Access the web application
+
+ http://web-nodejs.192.168.0.20.xip.io/
+ 
+ Watch the hostname in the page , it actually a container ID
+ 
+ ```
+ Hello Http :46847201c374
+ ```
 
 ###### beer!
 

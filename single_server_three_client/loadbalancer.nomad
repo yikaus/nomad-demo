@@ -35,7 +35,7 @@ job "loadbalancer" {
 				}
 			}
 			env {
-        HAPROXY_DOMAIN = "192.168.0.20.xip.io"
+				HAPROXY_DOMAIN = "192.168.0.20.xip.io"
 				CONSUL_CONNECT = "127.0.0.1:8500"
       }
 			resources {

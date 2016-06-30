@@ -1,4 +1,4 @@
-job "loadbalancer" {
+job "web" {
 	region = "au"
 	datacenters = ["dc1"]
 	type = "service"
@@ -6,26 +6,25 @@ job "loadbalancer" {
 		stagger = "10s"
 		max_parallel = 1
 	}
-	group "lb" {
-		count = 2
+	group "web" {
+		count = 3
 		restart {
 			interval = "5m"
 			attempts = 10
 			delay = "25s"
 			mode = "delay"
 		}
-		task "haproxy" {
+		task "nodejs" {
 			driver = "docker"
 			config {
-				image = "ciscocloud/haproxy-consul:latest"
-				network_mode = "host"
+				image = "yikaus/testweb"
 				port_map {
-					http = 80
+					http = 3000
 				}
 			}
 			service {
-				name = "${TASKGROUP}-web"
-				tags = ["global", "lb"]
+				name = "${TASKGROUP}-nodejs"
+				tags = ["global", "web"]
 				port = "http"
 				check {
 					name = "alive"
@@ -34,10 +33,6 @@ job "loadbalancer" {
 					timeout = "2s"
 				}
 			}
-			env {
-				HAPROXY_DOMAIN = "192.168.0.20.xip.io"
-				CONSUL_CONNECT = "127.0.0.1:8500"
-      }
 			resources {
 				cpu = 500 # 500 Mhz
 				memory = 128 # 128MB
