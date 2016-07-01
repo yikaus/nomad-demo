@@ -17,7 +17,7 @@ job "web" {
 		task "nodejs" {
 			driver = "docker"
 			config {
-				image = "yikaus/testweb"
+				image = "yikaus/nomad-demo-web"
 				port_map {
 					http = 3000
 				}

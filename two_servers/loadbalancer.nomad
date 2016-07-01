@@ -24,7 +24,7 @@ job "loadbalancer" {
 				}
 			}
 			service {
-				name = "${TASKGROUP}-web"
+				name = "${TASKGROUP}-haproxy"
 				tags = ["global", "lb"]
 				port = "http"
 				check {
