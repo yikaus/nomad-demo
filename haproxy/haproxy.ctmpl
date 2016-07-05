@@ -20,13 +20,13 @@ defaults
 frontend www
     bind *:80
 
-{{ range ls "service/web-nodejs" }}
+{{ range ls "services/web-nodejs" }}
     acl host_{{ .Name }} hdr(host) -i {{ .Name }}.{{ or (env "HAPROXY_DOMAIN") "haproxy.service.consul" }}
     use_backend {{ .Name }}_backend if host_{{ .Name }}
 {{ end }}
 
 ### Consul-configured backend services ###
-{{ range services }}
+{{ range ls "services/web-nodejs" }}
 backend {{ .Name }}_backend
 {{ range service .Name }}
    server {{ .Node }}-{{ .Port }} {{ .Address }}:{{ .Port }}{{ end }}
