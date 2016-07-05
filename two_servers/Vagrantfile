@@ -7,7 +7,7 @@ sudo apt-get update
 sudo apt-get -qq install apt-transport-https
 echo Fetching Nomad consul...
 cd /tmp/
-sudo curl -sSL https://releases.hashicorp.com/nomad/0.3.2/nomad_0.3.2_linux_amd64.zip -o nomad.zip
+sudo curl -sSL https://releases.hashicorp.com/nomad/0.4.0/nomad_0.4.0_linux_amd64.zip -o nomad.zip
 sudo curl -sSL https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_linux_amd64.zip -o consul.zip
 sudo curl -sSL https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_web_ui.zip -o consul_ui.zip
 echo Installing ...
@@ -24,6 +24,7 @@ sudo mv /tmp/nomadconfig /etc/nomad
 sudo systemctl enable consul.service nomad.service
 sudo systemctl start consul.service nomad.service
 echo "export NOMAD_ADDR=http://192.168.0.20:4646" >> /home/vagrant/.profile
+docker run -d --restart=always --dns '172.17.0.1' --name connectable -v /var/run/docker.sock:/var/run/docker.sock gliderlabs/connectable:master
 SCRIPT
 
 
@@ -70,7 +71,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end  
   end
 
-  
+  config.vm.provision "docker"
+    
   config.vm.provision :file do |file|
     file.source = "consul.service"
     file.destination = "/tmp/consul.service"
@@ -85,8 +87,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     shell.inline = $script1
     shell.privileged = false
   end  
-  
-  config.vm.provision "docker"
 
   config.vm.provider "virtualbox" do |vb|
      vb.memory = "768"

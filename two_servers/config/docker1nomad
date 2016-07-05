@@ -4,6 +4,10 @@ datacenter = "dc1"
 
 bind_addr = "192.168.0.20"
 
+advertise {
+  rpc = "192.168.0.20:4647"
+}
+
 # Increase log verbosity
 log_level = "DEBUG"
 
@@ -19,9 +23,13 @@ server {
 
 client {
 	enabled = true
-	servers = ["192.168.0.20:4647"]
   network_interface = "eth1"
-	options = {
-          consul.address = "192.168.0.20:8500"
-         }
+  options = {
+    "driver.raw_exec.enable" = "1"
+  }
+}
+
+consul {
+    # Consul's HTTP Address
+    address = "127.0.0.1:8500"
 }

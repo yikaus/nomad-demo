@@ -17,7 +17,7 @@ job "loadbalancer" {
 		task "haproxy" {
 			driver = "docker"
 			config {
-				image = "ciscocloud/haproxy-consul:latest"
+				image = "yikaus/nomad-demo-haproxy"
 				network_mode = "host"
 				port_map {
 					http = 80

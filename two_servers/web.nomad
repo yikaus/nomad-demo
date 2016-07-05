@@ -18,9 +18,13 @@ job "web" {
 			driver = "docker"
 			config {
 				image = "yikaus/nomad-demo-web"
+				labels = {
+          connect.6379 = "cache-redis.service.consul"
+        }
 				port_map {
 					http = 3000
 				}
+				dns_servers = ["8.8.8.8", "172.17.0.1"]
 			}
 			service {
 				name = "${TASKGROUP}-nodejs"

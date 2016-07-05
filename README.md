@@ -1,8 +1,19 @@
 ## Docker scheduler and service discovery with Nomad+Consul+Consult_template+haproxy
 
-This demo to quickly show you how to use nomad and consul setup a docker scheduler across cluster host as well as docker service discovery
+How to use nomad and consul setup a docker scheduler across cluster host as well as docker service discovery
 
-#### Nomad & Consul single server setup 
+External face loadbalancer using haproxy and consul-template 
+
+Internal discovery using Consul DNS and gliderlabs/connectable
+
+#### Nomad & Consul two servers setup 
+2 VMs : Docker1 Docker2
+
+Docker1 :  Nomad server/client + Consul server/client + connectable
+
+Docker2 :  Nomad server/client + Consul server/client + connectable
+
+#### Nomad & Consul single server setup  (to be completed)
 3 VMs : Docker1 Docker2 Docker3
 
 Docker1 :  Nomad & Consul server/client
@@ -11,17 +22,7 @@ Docker2 :  Nomad & Consul client
 
 Docker3 :  Nomad & Consul client
 
-#### Nomad & Consul two servers setup 
-2 VMs : Docker1 Docker2
-
-Docker1 :  Nomad server/client + Consul server/client
-
-Docker2 :  Nomad server/client + Consul server/client
-
 #### Bootstrap
-$ cd single_server_three_client
-
-OR
 
 $ cd two_servers
  
@@ -72,6 +73,9 @@ vagrant@docker2:~$ docker exec `haproxy_container_id` cat /haproxy/haproxy.cfg
  ```
  Hello Http :46847201c374
  ```
+
+#### Check the internal port within web docker instance
+docker exec `web-nodejs_container_id` nc -vz localhost 6379
 
 ###### beer!
 

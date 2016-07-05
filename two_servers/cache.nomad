@@ -1,4 +1,4 @@
-job "example" {
+job "cache" {
 	region = "au"
 	datacenters = ["dc1"]
 	type = "service"
@@ -17,10 +17,11 @@ job "example" {
 		task "redis" {
 			driver = "docker"
 			config {
-				image = "redis:latest"
+				image = "redis:3.0-alpine"
 				port_map {
 					db = 6379
 				}
+				dns_servers = ["8.8.8.8", "172.17.0.1"]
 			}
 			service {
 				name = "${TASKGROUP}-redis"
