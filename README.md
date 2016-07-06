@@ -12,7 +12,26 @@ Internal discovery using Consul DNS and gliderlabs/connectable
 Docker1 :  Nomad server/client + Consul server/client + connectable
 
 Docker2 :  Nomad server/client + Consul server/client + connectable
+```
++-------------------------+   +-------------------------+
+| +------+   +------+     |   | +------+   +------+     |
+| |Consul|   |Nomad |     |   | |Consul|   |Nomad |     |
+| +------+   +------+     |   | +------+   +------+     |
+| +-------+ +-----------+ |   | +-------+ +-----------+ |
+| |Haproxy| |Connectable| |   | |Haproxy| |Connectable| |
+| +--+----+ +-+-----+---+ |   | +--+----+ +-+-----+---+ |
+|    |        ^     |     |   |    |        ^     |     |
+|    |        |     |     |   |    |        |     |     |
+|    |        |     |     |   |    |        |     |     |
+|    v        |     v     |   |    v        |     v     |
+|       +-----+  +--+--+  |   |       +-----+  +--+--+  |
+| +---6379       |Cache|  |   | +---6379       |Cache|  |
+| |Web  |        +-----+  |   | |Web  |        +-----+  |
+| +-----+                 |   | +-----+                 |
++-------------------------+   +-------------------------+
 
+
+```
 #### Nomad & Consul single server setup  (to be completed)
 3 VMs : Docker1 Docker2 Docker3
 
