@@ -1,0 +1,35 @@
+region = "au"
+
+datacenter = "dc1"
+
+bind_addr = "192.168.0.21"
+
+advertise {
+  rpc = "192.168.0.21:4647"
+}
+
+# Increase log verbosity
+log_level = "DEBUG"
+
+# Setup data dir
+data_dir = "/tmp/nomad"
+
+# Enable the server
+server {
+    enabled = true
+    bootstrap_expect = 3
+    retry_join = ["192.168.0.20","192.168.0.22"]
+}
+
+client {
+	enabled = true
+  network_interface = "eth1"
+  options = {
+    "driver.raw_exec.enable" = "1"
+  }  
+}
+
+consul {
+    # Consul's HTTP Address
+    address = "127.0.0.1:8500"
+}

@@ -6,9 +6,9 @@
   "ports" : {
     "dns" : 53
   },
-  "bind_addr": "192.168.0.20",
+  "bind_addr": "192.168.0.21",
   "client_addr": "0.0.0.0",
   "ui_dir": "/lib/consul/ui",
-  "bootstrap_expect": 2,
-  "retry_join": ["192.168.0.21"]
+  "bootstrap_expect": 3,
+  "retry_join": ["192.168.0.20","192.168.0.22"]
 }

@@ -2,8 +2,13 @@
   "data_dir": "/tmp/consul",
   "log_level": "INFO",
   "server": true,
+  "recursors" : [ "8.8.8.8" ],
+  "ports" : {
+    "dns" : 53
+  },
   "bind_addr": "192.168.0.20",
   "client_addr": "0.0.0.0",
   "ui_dir": "/lib/consul/ui",
-  "bootstrap_expect": 1
+  "bootstrap_expect": 3,
+  "retry_join": ["192.168.0.21","192.168.0.22"]
 }

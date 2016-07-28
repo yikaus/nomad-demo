@@ -17,8 +17,8 @@ data_dir = "/tmp/nomad"
 # Enable the server
 server {
     enabled = true
-    bootstrap_expect = 2
-    retry_join = ["192.168.0.21"]
+    bootstrap_expect = 3
+    retry_join = ["192.168.0.21","192.168.0.22"]
 }
 
 client {
