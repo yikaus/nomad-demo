@@ -1,4 +1,4 @@
-## Docker scheduler and service discovery with Nomad+Consul+Consult_template+haproxy
+## Docker scheduler and service discovery with Nomad+Consul+Consult_template+haproxy+connectable
 
 How to use nomad and consul setup a docker scheduler across cluster host as well as docker service discovery
 
