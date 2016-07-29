@@ -91,5 +91,9 @@ docker exec `web-nodejs_container_id` nc -vz localhost 6379
 
 ###### beer!
 
+Vagrant 1.8.5
+Nomad 0.4.0
+Consul 0.6.4
+
 
  
